@@ -27,7 +27,8 @@ public class UserController {
     }
     @RequestMapping(value = "/join",method = RequestMethod.POST) //2차주소값
     public String join(UserEntity param){
-        System.out.println("uid"+param);
+        System.out.println(param);
+        service.join(param);
         return "redirect:/user/join"; //겟디스페쳐.forward
         //redirect : response.sendRedirect
     }
