@@ -19,6 +19,9 @@
     <!-- 애노테이션으로 빈 등록할 클래스들을 스캔또는 시작 패키지 설정-->
     <context:component-scan base-package="com.koreait.spring"/>
 
+    <!--res밑에 모든주소값 mapping값으로 들어온다면 location으로 연결해줌-->
+    <mvc:resources mapping="/res/**" location="/res/"/>
+
     <!-- 사용할 파일명을 완성해주는 객체 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
