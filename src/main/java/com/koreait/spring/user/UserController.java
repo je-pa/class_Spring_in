@@ -20,13 +20,20 @@ public class UserController {
     public String login(){
         return "user/login"; //겟디스페쳐.forward
     }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST) //2차주소값
+    public String login(UserEntity param){
+        return "redirect:"+service.login(param);
+        //return "redirect:/board/list";
+    }
+
     @RequestMapping(value = "/join") //2차주소값
     public String join(){
         return "user/join"; //겟디스페쳐.forward
         //redirect : response.sendRedirect
     }
     @RequestMapping(value = "/join",method = RequestMethod.POST) //2차주소값
-    public String join(UserEntity param){
+    public String join(UserEntity param) {
         System.out.println(param);
         service.join(param);
         return "redirect:/user/join"; //겟디스페쳐.forward
