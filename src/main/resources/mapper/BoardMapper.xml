@@ -8,4 +8,9 @@
         FROM t_board a INNER JOIN t_user b ON a.iuser=b.iuser
         ORDER BY a.iboard DESC
     </select>
+    <select id="selBoard" resultType="BoardDomain">
+        SELECT a.iboard, a.title,a.ctnt, a.iuser, a.regdt, b.unm AS writerNm, b.profileimg
+        FROM t_board a INNER JOIN t_user b ON a.iuser=b.iuser
+        WHERE a.iboard=#{iboard}
+    </select>
 </mapper>

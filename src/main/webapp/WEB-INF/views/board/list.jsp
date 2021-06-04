@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>리스트</title>
+    <link rel="stylesheet" href="/res/css/boardList.css">
+    <script defer src ="/res/js/boardList.js"></script>
 </head>
 <body>
 <h1>리스트</h1>
