@@ -3,9 +3,7 @@ package com.koreait.spring.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,11 +29,14 @@ BoardController {
         model.addAttribute("data",data);
         return "board/detail";
     }
-    @ResponseBody
-    @RequestMapping("/cmtInsSel")
-    public Map<String,Integer> cmtInSel(){
-        Map<String,Integer> data = new HashMap<>();
+    @ResponseBody //ajax의 목적
+    @RequestMapping(value = "/cmtInsSel", method = RequestMethod.POST)
+    public Map<String,Integer> cmtInSel(@RequestBody BoardCmtEntity param){
+        System.out.println("param = "+param);
+        Map<String,Integer> data = new HashMap<>();// 키 String 값 int
         data.put("result",1);
+        data.put("age",30);
+        //jackson라이브러리로 json형태로 됩니당~!
         return data;
     }
 }
