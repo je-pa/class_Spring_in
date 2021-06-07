@@ -17,10 +17,16 @@ function regCmt(){
 function regAjax(param){
 	const init={
 		method:'POST',
-		body:new URLSearchParams(param)
+		//body:new URLSearchParams(param),
+		body:JSON.stringify(param),
+		headers:{
+			'accept' : 'application/json',
+			'content-type' : 'application/json;charset=UTF-8'
+		}
+
 	};
 	
-	fetch('/board/cmtInsSel',init) //init안하면 디폴트 형식으로 돌아감
+	fetch('cmtIns',init) //init안하면 디폴트 형식으로 돌아감
 	.then(function(res){
 		return res.json();
 	})
@@ -33,7 +39,7 @@ function regAjax(param){
 			break;
 		case 1:
 			alert('등록완료');
-			cmtFrmElem.cmt.value
+			cmtFrmElem.cmt.value = '';
 			getListAjax();
 			break;	
 		}
@@ -43,7 +49,7 @@ function regAjax(param){
 function getListAjax(){
 	var iboard = cmtListElem.dataset.iboard;
 	
-	fetch('cmtInsSel?iboard='+iboard)
+	fetch('cmtSel?iboard='+iboard)
 	.then(function(res){
 		return res.json();
 	})
@@ -55,7 +61,9 @@ function getListAjax(){
 }
 function makeCmtElemList(data){
 	cmtListElem.innerHTML='';//댓글 쓸때마다 테이블이 또 생기는것을 방지
-	
+	/*cmtListElem.innerText //태그 없는상태
+	cmtListElem.append()
+	cmtListElem.appendChild()*/
 	var tableElem = document.createElement('table');
 	var trElemTitle = document.createElement('tr');
 	var thElemCtnt = document.createElement('th');
@@ -203,4 +211,4 @@ function openModModal({icmt,cmt}){//필요한 값만 빼올수 있다
 function closeModModal(){
 	cmtModModalElem.className='displayNone';
 }
-//getListAjax();//이 파일 임포트되면 함수 호출됨
+getListAjax();//이 파일 임포트되면 함수 호출됨

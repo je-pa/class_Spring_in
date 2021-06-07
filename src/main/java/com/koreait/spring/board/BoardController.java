@@ -30,13 +30,21 @@ BoardController {
         return "board/detail";
     }
     @ResponseBody //ajax의 목적
-    @RequestMapping(value = "/cmtInsSel", method = RequestMethod.POST)
-    public Map<String,Integer> cmtInSel(@RequestBody BoardCmtEntity param){
+    @RequestMapping(value = "/cmtIns", method = RequestMethod.POST)
+    public Map<String,Integer> cmtIns(@RequestBody BoardCmtEntity param){
         System.out.println("param = "+param);
+        int result = service.insBoardCmt(param);
+
         Map<String,Integer> data = new HashMap<>();// 키 String 값 int
-        data.put("result",1);
-        data.put("age",30);
+        data.put("result",result);
+
         //jackson라이브러리로 json형태로 됩니당~!
         return data;
+    }
+    @ResponseBody
+    @RequestMapping("/cmtSel")
+    public List<BoardCmtDomain> cmtSel(BoardCmtEntity param){
+        System.out.println("param = " +param );
+        return service.selBoardCmtList(param);
     }
 }
