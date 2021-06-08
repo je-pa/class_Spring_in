@@ -34,10 +34,17 @@ public class BoardService {
         return cmtMapper.selBoardCmtList(param);
     }
 
+    public int updBoardCmt(BoardCmtEntity param){
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        param.setIuser(loginUser.getIuser());
+        System.out.println("service upd : "+param);
+        return cmtMapper.updBoardCmt(param);
+    }
+
     public int delBoardCmt(BoardCmtEntity param){
         UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
         param.setIuser(loginUser.getIuser());
-        System.out.println("service"+param);
+        System.out.println("service : "+param);
         return cmtMapper.delBoardCmt(param);
     }
 }
