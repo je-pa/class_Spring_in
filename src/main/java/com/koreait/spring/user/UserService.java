@@ -56,6 +56,14 @@ public class UserService {
         }catch (IOException e ){
             e.printStackTrace();
         }
+        UserEntity param = new UserEntity();
+        param.setIuser(loginUser.getIuser());
+        param.setProfileImg(fileNm);
+
+        mapper.updUser(param);
+
+        loginUser.setProfileImg(fileNm);
+
         return "/user/profile";
     }
 }
