@@ -13,7 +13,14 @@
         SELECT a.icmt, a.iuser, a.cmt, a.regdate, b.unm as writerNm, b.profileImg
         FROM t_board_cmt a
         INNER JOIN t_user b ON a.iuser=b.iuser
-        WHERE a.iboard = ${iboard}
+        WHERE a.iboard = #{iboard}
         ORDER BY a.icmt
     </select>
+    <update id="">
+
+    </update>
+    <delete id="delBoardCmt">
+        DELETE FROM t_board_cmt
+        WHERE icmt= #{icmt} AND  iuser=#{iuser}
+    </delete>
 </mapper>

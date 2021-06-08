@@ -8,4 +8,5 @@ import java.util.List;
 public interface BoardCmtMapper { //public abstract
     int insBoardCmt(BoardCmtEntity param);
     List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param);
+    int delBoardCmt(BoardCmtEntity param);
 }

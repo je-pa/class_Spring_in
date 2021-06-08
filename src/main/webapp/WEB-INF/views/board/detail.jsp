@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/res/css/common.css">
     <link rel="stylesheet" href="/res/css/boardDetail.css">
     <script defer src="/res/js/BoardDetail.js"></script>
 </head>
@@ -31,7 +32,17 @@
             </form>
         </div>
     </c:if>
-    <div id="cmtList" data-login-user-pk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
+    <div id="modal" class="displayNone">
+        <div class="modal_content">
+            <form id="cmtModFrm" action="#">
+                <input type="hidden" id="icmt">
+                <input type="text" id="modCmt">
+            </form>
+            <input type="button" value="댓글 수정" onclick="modAjax();">
+            <input type="button" value="취소" onclick="closeModModal();">
+        </div>
+    </div>
+    <div id="cmtList" data-loginuserpk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
 
 
 </body>

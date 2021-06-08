@@ -2,14 +2,11 @@ var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
 var cmtModModalElem= document.querySelector('#modal');
 function regCmt(){
-	var cmtVal = cmtFrmElem.cmt.value;
-	
-	console.log('cmtVal : '+cmtVal);
+	//console.log('cmtVal : '+cmtVal);
 	console.log(cmtListElem.dataset.iboard);//data-
-	
 	var param={
 		iboard:cmtListElem.dataset.iboard,
-		cmt:cmtVal
+		cmt:cmtFrmElem.cmt.value
 	};
 	regAjax(param);
 }
@@ -23,10 +20,9 @@ function regAjax(param){
 			'accept' : 'application/json',
 			'content-type' : 'application/json;charset=UTF-8'
 		}
-
 	};
 	
-	fetch('cmtIns',init) //init안하면 디폴트 형식으로 돌아감
+	fetch('cmt',init) //init안하면 디폴트 형식으로 돌아감
 	.then(function(res){
 		return res.json();
 	})
@@ -49,7 +45,7 @@ function regAjax(param){
 function getListAjax(){
 	var iboard = cmtListElem.dataset.iboard;
 	
-	fetch('cmtSel?iboard='+iboard)
+	fetch('cmt/'+iboard)
 	.then(function(res){
 		return res.json();
 	})
@@ -104,7 +100,7 @@ function makeCmtElemList(data){
 			</table>
 		</div>
 	 */
-	var loginUserPk = cmtListElem.dataset.login_user_pk;
+	var loginUserPk = cmtListElem.dataset.loginuserpk;
 	
 	data.forEach(function(item){
 		var trElemItem = document.createElement('tr');
@@ -126,7 +122,7 @@ function makeCmtElemList(data){
 			delBtn.addEventListener
 			('click'/*이벤트가 무엇인지 hover*/ ,function(){
 				if(confirm('삭제하시겠습니까?')){//확인(true)과 취소(false)
-					delAjax(item.icmt);					
+					delAjax(item.icmt);
 				} 
 			})
 			//수정버튼 클릭
@@ -151,7 +147,8 @@ function makeCmtElemList(data){
 	});
 }
 function delAjax(icmt){
-	fetch('cmtDelUpd?icmt='+icmt)//호출 프로미스 객체를 리턴?
+	console.log(icmt);
+	fetch('cmt/'+icmt, {method: 'DELETE'})//호출 프로미스 객체를 리턴?
 	.then(function(res){
 		return res.json();
 	})
@@ -173,11 +170,11 @@ function modAjax(){
 	var cmtModFrmElem = document.querySelector('#cmtModFrm');
 	var param = {
 		icmt:cmtModFrmElem.icmt.value,
-		cmt:cmtModFrmElem.cmt.value
+		cmt:cmtModFrmElem.modCmt.value
 	}
 	const init={
-		method:'POST',
-		body:new URLSearchParams(param)
+		method:'PUT',
+		body:JSON.stringify(param)
 	};
 	
 	fetch('/board/cmtDelUpd',init) //init안하면 디폴트 형식으로 돌아감
@@ -205,7 +202,7 @@ function openModModal({icmt,cmt}){//필요한 값만 빼올수 있다
 	console.log('icmt : '+icmt);
 	console.log('cmt : '+cmt);
 	cmtModFrmElem.icmt.value = icmt;
-	cmtModFrmElem.cmt.value = cmt;
+	cmtModFrmElem.modCmt.value = cmt;
 }
 
 function closeModModal(){

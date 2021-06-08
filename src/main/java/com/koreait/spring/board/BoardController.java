@@ -30,9 +30,9 @@ BoardController {
         return "board/detail";
     }
     @ResponseBody //ajax의 목적
-    @RequestMapping(value = "/cmtIns", method = RequestMethod.POST)
+    @RequestMapping(value = "/cmt", method = RequestMethod.POST)
     public Map<String,Integer> cmtIns(@RequestBody BoardCmtEntity param){
-        System.out.println("param = "+param);
+        System.out.println("param ins = "+param);
         int result = service.insBoardCmt(param);
 
         Map<String,Integer> data = new HashMap<>();// 키 String 값 int
@@ -42,9 +42,23 @@ BoardController {
         return data;
     }
     @ResponseBody
-    @RequestMapping("/cmtSel")
-    public List<BoardCmtDomain> cmtSel(BoardCmtEntity param){
-        System.out.println("param = " +param );
+    @RequestMapping("/cmt/{iboard}")
+    public List<BoardCmtDomain> cmtSel(BoardCmtEntity param, @PathVariable("iboard") int iboard){
+        param.setIboard(iboard);
+        System.out.println("param sel = " +param );
         return service.selBoardCmtList(param);
+    }
+    @ResponseBody //ajax의 목적
+    @RequestMapping(value = "/cmt/{icmt}", method = RequestMethod.DELETE)
+    public Map<String,Integer> cmtDel(BoardCmtEntity param, @PathVariable int icmt){
+        param.setIcmt(icmt);
+        System.out.println("param del = "+param);
+        int result = service.delBoardCmt(param);
+
+        Map<String,Integer> data = new HashMap<>();// 키 String 값 int
+        data.put("result",result);
+
+        //jackson라이브러리로 json형태로 됩니당~!
+        return data;
     }
 }
