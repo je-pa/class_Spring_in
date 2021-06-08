@@ -51,6 +51,7 @@ public class UserController {
         return "redirect:/user/join"; //겟디스페쳐.forward
         //redirect : response.sendRedirect
     }
+    //마이페이지
     @RequestMapping("/profile")
     public String profile(){
         return "user/profile";

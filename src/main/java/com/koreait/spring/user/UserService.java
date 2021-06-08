@@ -38,6 +38,7 @@ public class UserService {
         param.setUpw(cryptPw);
         return mapper.insUser(param);
     }
+    //마이페이지
     public String uploadProfile(MultipartFile img){
         UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
         final String PATH = "D:/springImg/"+loginUser.getIuser();
