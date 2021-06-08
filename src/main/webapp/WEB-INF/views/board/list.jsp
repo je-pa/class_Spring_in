@@ -11,11 +11,15 @@
 <head>
     <meta charset="UTF-8">
     <title>리스트</title>
+
     <link rel="stylesheet" href="/res/css/boardList.css">
     <script defer src ="/res/js/boardList.js"></script>
 </head>
 <body>
 <h1>리스트</h1>
+<div>
+    <span><a href ="/user/profile">프로필가기</a></span>
+</div>
 <table>
     <tr><th>no</th><th>title</th><th>작성자</th><th>작성일</th></tr>
 

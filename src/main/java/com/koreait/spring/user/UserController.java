@@ -3,9 +3,11 @@ package com.koreait.spring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Clock;
 
@@ -48,5 +50,14 @@ public class UserController {
         service.join(param);
         return "redirect:/user/join"; //겟디스페쳐.forward
         //redirect : response.sendRedirect
+    }
+    @RequestMapping("/profile")
+    public String profile(){
+        return "user/profile";
+    }
+    @PostMapping(value = "/profile")
+    //같은의미 @RequestMapping(value = "/profile",method = RequestMethod.POST)
+    public String profile(@RequestParam("profileImg") MultipartFile/*여러파일이면 []*/ profileImg /*형식이 파일인 것들 전부 여기로*/){
+        return "redirect:"+service.uploadProfile(profileImg);
     }
 }

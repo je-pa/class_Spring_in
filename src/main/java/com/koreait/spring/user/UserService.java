@@ -1,10 +1,16 @@
 package com.koreait.spring.user;
 
+import org.apache.commons.io.FilenameUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Service //bean등록 -> 주소값
 public class UserService {
@@ -31,5 +37,24 @@ public class UserService {
         String cryptPw = BCrypt.hashpw(param.getUpw(),BCrypt.gensalt());
         param.setUpw(cryptPw);
         return mapper.insUser(param);
+    }
+    public String uploadProfile(MultipartFile img){
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        final String PATH = "D:/springImg/"+loginUser.getIuser();
+
+        File folder = new File(PATH);
+        folder.mkdirs();
+
+        String ext = FilenameUtils.getExtension(img.getOriginalFilename());
+        /*원래파일명확장자..! 그전에는 우리가 직접 구현했다구한다*/
+        String fileNm = UUID.randomUUID().toString()+"."+ext;/*랜덤한 파일네임*/
+
+        File target = new File(PATH + "/"+fileNm);
+        try{
+            img.transferTo(target);
+        }catch (IOException e ){
+            e.printStackTrace();
+        }
+        return "/user/profile";
     }
 }

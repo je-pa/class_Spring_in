@@ -41,6 +41,7 @@ BoardController {
         //jackson라이브러리로 json형태로 됩니당~!
         return data;
     }
+
     @ResponseBody
     @RequestMapping("/cmt/{iboard}")
     public List<BoardCmtDomain> cmtSel(BoardCmtEntity param, @PathVariable("iboard") int iboard){
@@ -48,6 +49,18 @@ BoardController {
         System.out.println("param sel = " +param );
         return service.selBoardCmtList(param);
     }
+    @ResponseBody //ajax의 목적
+    @RequestMapping(value = "/cmt", method = RequestMethod.PUT)
+    public Map<String,Integer> cmtUpd(@RequestBody BoardCmtEntity param){
+        System.out.println("param upd = "+param);
+        int result = service.updBoardCmt(param);
+        Map<String,Integer> data = new HashMap<>();// 키 String 값 int
+        data.put("result",result);
+
+        //jackson라이브러리로 json형태로 됩니당~!
+        return data;
+    }
+
     @ResponseBody //ajax의 목적
     @RequestMapping(value = "/cmt/{icmt}", method = RequestMethod.DELETE)
     public Map<String,Integer> cmtDel(BoardCmtEntity param, @PathVariable int icmt){
