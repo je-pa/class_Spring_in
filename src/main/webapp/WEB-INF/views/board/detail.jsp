@@ -12,11 +12,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/res/css/common.css">
-    <link rel="stylesheet" href="/res/css/boardDetail.css">
-    <script defer src="/res/js/BoardDetail.js"></script>
+    <link rel="stylesheet" href="/res/css/board/detail.css">
+    <script defer src="/res/js/board/detail.js"></script>
 </head>
 <body>
-    <link rel="stylesheet" href="/res/css/boardDetail.css">
+    <link rel="stylesheet" href="/res/css/board/detail.css">
     <div><a href="#" onclick="goBack();">돌아가기</a></div>
     <h1>${requestScope.data.title}</h1>
     <div>번호 : ${requestScope.data.iboard }</div>

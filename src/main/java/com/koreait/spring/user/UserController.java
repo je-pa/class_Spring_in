@@ -3,12 +3,11 @@ package com.koreait.spring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.Clock;
 
 @Controller
@@ -60,5 +59,13 @@ public class UserController {
     //같은의미 @RequestMapping(value = "/profile",method = RequestMethod.POST)
     public String profile(@RequestParam("profileImg") MultipartFile/*여러파일이면 []*/ profileImg /*형식이 파일인 것들 전부 여기로*/){
         return "redirect:"+service.uploadProfile(profileImg);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession hs, HttpServletRequest req){
+        hs.invalidate();
+        String referer = req.getHeader(("Referer"));
+        return "redirect:"+referer;//전페이지
+        //return "redirect:/user/login";
     }
 }
