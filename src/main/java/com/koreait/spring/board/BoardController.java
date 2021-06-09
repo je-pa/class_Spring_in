@@ -29,6 +29,15 @@ BoardController {
         model.addAttribute("data",data);
         return "board/detail";
     }
+    @GetMapping("/writeMod")
+    public void writeMod(){}
+
+    @PostMapping("/writeMod")
+    public String writeMod(BoardCmtEntity param){
+        int iboard = service.writeMod(param);
+        return "redirect:detail?iboard="+iboard;
+    }
+
     @ResponseBody //ajax의 목적
     @RequestMapping(value = "/cmt", method = RequestMethod.POST)
     public Map<String,Integer> cmtIns(@RequestBody BoardCmtEntity param){
@@ -74,4 +83,5 @@ BoardController {
         //jackson라이브러리로 json형태로 됩니당~!
         return data;
     }
+
 }
