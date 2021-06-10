@@ -3,6 +3,13 @@
 
     <link rel="stylesheet" href="/res/css/board/detail.css">
     <div><a href="#" onclick="goBack();">돌아가기</a></div>
+    <c:if test="${sessionScope.loginUser.iuser == requestScope.data.iuser}">
+        <div>
+            <a href="/board/writeMod?iboard=${param.iboard}">수정</a>
+            <a href="/board/delBoard?iboard=${param.iboard}">삭제</a>
+
+        </div>
+    </c:if>
     <h1>${requestScope.data.title}</h1>
     <div>번호 : ${requestScope.data.iboard }</div>
     <div>작성일 : ${requestScope.data.regdt}</div>

@@ -5,7 +5,7 @@
     <c:choose>
       <c:when test="${empty sessionScope.loginUser}">
         <li><a href="/user/login">로그인</a> </li>
-        <li> <a href="join">회원가입</a></li>
+        <li> <a href="/user/join">회원가입</a></li>
       </c:when>
       <c:otherwise>
         <li><a href="/user/logout">로그아웃</a> </li>

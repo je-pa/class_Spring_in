@@ -6,10 +6,6 @@
     <definition name="basic_template" template="/WEB-INF/views/tilesTemplate.jsp">
         <put-attribute name="header" value="/WEB-INF/views/tilesHeader.jsp"/>
     </definition>
-    <definition name="*" extends="basic_template">
-        <!--파일리턴값 체계 1차      위에 이름 맞춤-->
-        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
-    </definition>
 
     <definition name="*/*" extends="basic_template">
         <!--파일 리턴값 체계 1차/2차,       위에 이름 맞춤-->

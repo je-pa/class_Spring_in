@@ -19,4 +19,13 @@
         FROM t_board a INNER JOIN t_user b ON a.iuser=b.iuser
         WHERE a.iboard=#{iboard}
     </select>
+    <update id="updBoard">
+        UPDATE t_board
+        SET title=#{title} , ctnt=#{ctnt}
+        WHERE iboard=#{iboard} AND iuser = #{iuser}
+    </update>
+    <delete id="delBoard">
+        DELETE FROM t_board
+        WHERE iboard=#{iboard} AND iuser = #{iuser}
+    </delete>
 </mapper>

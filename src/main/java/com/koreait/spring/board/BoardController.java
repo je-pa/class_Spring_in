@@ -30,12 +30,27 @@ BoardController {
         return "board/detail";
     }
     @GetMapping("/writeMod")
-    public void writeMod(){}
-
+    public void writeMod(BoardDTO param, Model model){
+        System.out.println("param = "+param);
+        if(param.getIboard()>0){
+            model.addAttribute("data",service.selBoard(param));
+        }//else 넣어서
+    }
     @PostMapping("/writeMod")
     public String writeMod(BoardEntity param){
         int iboard = service.writeMod(param);
         return "redirect:detail?iboard="+iboard;
+    }
+
+    @GetMapping("/delBoard")
+    public String delBoard(BoardEntity param,@RequestParam int iboard ){
+        System.out.println(" d "+iboard);
+        param.setIboard(iboard);
+        System.out.println("del "+param.getIboard());
+
+        service.delBoard(param);
+
+        return "redirect:list";
     }
 
     @ResponseBody //ajax의 목적
