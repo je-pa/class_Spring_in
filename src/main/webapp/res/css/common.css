@@ -1,5 +1,5 @@
 @charset "UTF-8";
-hrml, body,ul{
+hrml, body{
 	margin:0;
 	padding:0;
 	height:100vh;
@@ -32,3 +32,6 @@ section { padding-left: 40px; padding-right:40px}
 	color:red;
 }
 .displayNone{display:none !important;}
+
+.fa-kiss-wink-heart {	color: #e74c3c; }
+.pointer{cursor:pointer;}

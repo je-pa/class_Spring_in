@@ -212,4 +212,79 @@ function openModModal({icmt,cmt}){//필요한 값만 빼올수 있다
 function closeModModal(){
 	cmtModModalElem.className='displayNone';
 }
+var favIconElem = document.querySelector("#favIcon");
+
+favIconElem.addEventListener('click', function(){
+	if (favIconElem.classList.contains('far')) {
+		insFavAjax();
+	} else {
+		delFavAjax();
+	}
+});
+
+function insFavAjax(){
+	const param = {
+		iboard: cmtListElem.dataset.iboard
+	}
+	const init = {
+		method:'POST',
+		body:JSON.stringify(param),
+		headers:{
+			'accept' : 'application/json',
+			'content-type' : 'application/json;charset=UTF-8'
+		}
+	};
+	fetch('fav',init)
+	.then(function(res){
+		return res.json();
+	})
+	.then(function (myJson){
+		if(myJson.result===1){
+			toggleFav(1);
+		}
+	})
+}
+function delFavAjax(){
+	const init = {
+		method:'DELETE'
+	}
+	const iboard = cmtListElem.dataset.iboard;
+	console.log(iboard);
+	fetch('fav?iboard='+iboard,init)
+	.then(function(res){
+		return res.json();
+	})
+	.then(function (myJson){
+		if(myJson.result===1){
+			toggleFav(0);
+		}
+	})
+}
+
+// 좋아요 여부
+function getFavAjax(){
+	var iboard = cmtListElem.dataset.iboard;
+	fetch('fav?iboard='+iboard) //init안하면 디폴트 형식으로 돌아감
+	.then(function(res){
+		return res.json();
+	})
+	.then(function(myJson){
+
+		toggleFav(myJson.result);
+
+	});
+}
+function toggleFav(toggle) {
+	switch(toggle){
+		case 0:
+			favIconElem.classList.remove('fas');
+			favIconElem.classList.add('far');
+			break;
+		case 1:
+			favIconElem.classList.remove('far');
+			favIconElem.classList.add('fas');
+			break;
+	}
+}
 getListAjax();//이 파일 임포트되면 함수 호출됨
+getFavAjax();
