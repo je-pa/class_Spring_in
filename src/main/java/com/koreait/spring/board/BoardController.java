@@ -33,7 +33,7 @@ BoardController {
     public void writeMod(){}
 
     @PostMapping("/writeMod")
-    public String writeMod(BoardCmtEntity param){
+    public String writeMod(BoardEntity param){
         int iboard = service.writeMod(param);
         return "redirect:detail?iboard="+iboard;
     }

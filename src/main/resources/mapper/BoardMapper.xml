@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.koreait.spring.board.BoardMapper">
-    <insert id="insBoard">
+    <insert id="insBoard" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO t_board
         ( title, ctnt, iuser)
         VALUES

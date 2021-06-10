@@ -26,24 +26,27 @@ public class BoardService {
     }
 
     //return 값은 iboard값
-    public int writeMod(BoardCmtEntity param){
+    public int writeMod(BoardEntity param){
         UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
         param.setIuser(loginUser.getIuser());
-
+        //iboard(0), title, ctnt, iuser
         if(param.getIboard()==0){
+            mapper.insBoard(param);
+        }else{
 
-            return 0;
         }
         //수정
-        return 0;
+        return param.getIboard();
     }
 
+/*-----------------댓글----------------------*/
     public int insBoardCmt(BoardCmtEntity param){
         UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
         param.setIuser(loginUser.getIuser());
         System.out.println(param);
         return cmtMapper.insBoardCmt(param);
     }
+
     public List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param){
         return cmtMapper.selBoardCmtList(param);
     }
