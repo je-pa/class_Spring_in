@@ -14,6 +14,9 @@ public class BoardFavController {
     @Autowired
     private BoardFavService service;
 
+    @Autowired
+    private BoardService service2;
+
     @PostMapping("/fav")           //다시 객체(jackson)
     public Map<String,Integer> insFav(@RequestBody BoardFavEntity param){
         Map<String,Integer> result = new HashMap<>();
@@ -21,8 +24,9 @@ public class BoardFavController {
         return result;
     }
     @GetMapping("/fav")
-    public List<BoardDomain> selFavBoardList(){
-        return null;
+    public List<BoardDomain> selFavBoardList(BoardDTO param){
+        param.setSelType(1);
+        return service2.selBoardList(param);
     }
     @GetMapping("/fav/{iboard}")
     public Map<String,Integer> selFav(BoardFavEntity param, @PathVariable int iboard){
