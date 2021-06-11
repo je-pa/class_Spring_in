@@ -2,7 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>리스트</h1>
 <div>
-    <span><a href ="/user/profile">프로필가기</a></span>
+    <form action="list" id="frm">
+        <input type="hidden1" name="page" value="${empty param.page?1:param.page}">
+        <select name="recordCnt">
+            <c:forEach begin="5" end="20" step="5" var="cnt">
+                <c:choose>
+                    <c:when test="${cnt eq param.recordCnt}">
+                        <option selected>${cnt}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option>${cnt}</option>
+                    </c:otherwise>
+                </c:choose>
+
+            </c:forEach>
+        </select>
+    </form>
 </div>
 <table>
     <tr><th>no</th><th>title</th><th>작성자</th><th>작성일</th></tr>
@@ -47,5 +62,17 @@
             <td>${item.regdt}</td>
         </tr>
     </c:forEach>
+
 </table>
+<c:forEach var="page" begin="1" end="${requestScope.maxPage}">
+    <c:choose>
+        <c:when test="${param.page eq page || (empty param.page && page eq 1)}">
+            <span class = "selected">${page}</span>
+        </c:when>
+        <c:otherwise>
+            <span><a href="list?page=${page}&recordCnt=${param.recordCnt}">${page}</a> </span>
+        </c:otherwise>
+    </c:choose>
+
+</c:forEach>
 

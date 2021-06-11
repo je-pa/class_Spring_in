@@ -20,6 +20,8 @@ BoardController {
     public String list(Model model,BoardDTO param){
         List<BoardDomain> list = service.selBoardList(param);
         model.addAttribute("list",list);
+        int maxPage =service.selMaxPageVal(param);
+        model.addAttribute("maxPage",maxPage);
         return "board/list";
     }
     @RequestMapping("/detail")

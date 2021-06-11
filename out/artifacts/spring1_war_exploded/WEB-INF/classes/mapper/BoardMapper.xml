@@ -22,6 +22,12 @@
             </if>
             ON a.iboard = c.iboard AND c.iuser=#{iuser}
         ORDER BY a.iboard DESC
+        <if test="recordCnt>0">
+            LIMIT #{startIdx},#{recordCnt}
+        </if>
+    </select>
+    <select id="selMaxPageVal" resultType="_int">
+        SELECT CEIL(COUNT(iboard)/#{recordCnt}) FROM t_board
     </select>
     <select id="selBoard" resultType="BoardDomain">
         SELECT a.iboard, a.title,a.ctnt, a.iuser, a.regdt, b.unm AS writerNm, b.profileimg
