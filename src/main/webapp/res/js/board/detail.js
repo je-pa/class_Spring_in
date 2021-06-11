@@ -225,10 +225,11 @@ favIconElem.addEventListener('click', function(){
 function insFavAjax(){
 	const param = {
 		iboard: cmtListElem.dataset.iboard
-	}
+	}//객체
+	console.log(param);
 	const init = {
 		method:'POST',
-		body:JSON.stringify(param),
+		body:JSON.stringify(param),//문자열
 		headers:{
 			'accept' : 'application/json',
 			'content-type' : 'application/json;charset=UTF-8'
@@ -236,7 +237,7 @@ function insFavAjax(){
 	};
 	fetch('fav',init)
 	.then(function(res){
-		return res.json();
+		return res.json(); //다시 객체
 	})
 	.then(function (myJson){
 		if(myJson.result===1){
@@ -264,14 +265,12 @@ function delFavAjax(){
 // 좋아요 여부
 function getFavAjax(){
 	var iboard = cmtListElem.dataset.iboard;
-	fetch('fav?iboard='+iboard) //init안하면 디폴트 형식으로 돌아감
+	fetch('fav/'+iboard) //init안하면 디폴트 형식으로 돌아감
 	.then(function(res){
 		return res.json();
-	})
+	})//promise<any>
 	.then(function(myJson){
-
 		toggleFav(myJson.result);
-
 	});
 }
 function toggleFav(toggle) {

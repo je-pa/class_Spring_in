@@ -11,7 +11,9 @@
     </insert>
     <select id="selBoardList" resultType="BoardDomain">
         SELECT a.iboard, a.title, a.iuser, a.regdt, b.unm AS writerNm, b.profileimg
+                , case when c.iboard IS null then 0 ELSE 1 END AS isfav
         FROM t_board a INNER JOIN t_user b ON a.iuser=b.iuser
+                       LEFT JOIN t_board_fav c ON a.iboard = c.iboard AND c.iuser=#{iuser}
         ORDER BY a.iboard DESC
     </select>
     <select id="selBoard" resultType="BoardDomain">

@@ -17,8 +17,8 @@ BoardController {
     private BoardService service;
 
     @RequestMapping("/list")
-    public String list(Model model){
-        List<BoardDomain> list = service.selBoardList();
+    public String list(Model model,BoardDTO param){
+        List<BoardDomain> list = service.selBoardList(param);
         model.addAttribute("list",list);
         return "board/list";
     }
@@ -98,5 +98,8 @@ BoardController {
         //jackson라이브러리로 json형태로 됩니당~!
         return data;
     }
+
+    @GetMapping ("/favList")
+    public void favList(){}
 
 }

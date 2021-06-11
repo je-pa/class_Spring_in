@@ -11,7 +11,11 @@
         </div>
     </c:if>
     <h1>${requestScope.data.title}</h1>
-    <div>번호 : ${requestScope.data.iboard } <i id="favIcon" class="far fa-kiss-wink-heart"></i></div>
+    <div>번호 : ${requestScope.data.iboard }
+        <c:if test="${not empty sessionScope.loginUser}">
+            <i id="favIcon" class="far fa-kiss-wink-heart pointer"></i>
+        </c:if>
+    </div>
     <div>작성일 : ${requestScope.data.regdt}</div>
     <div>작성자 : ${requestScope.data.writerNm}</div>
     <div><c:out value="${requestScope.data.ctnt}"/></div>

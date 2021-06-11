@@ -11,4 +11,6 @@ public class BoardDTO {
     private int searchType;
     private String searchText;
     private int iboard;
+    private int iuser;
+    private int selType; //0:기본리스트, 1: 좋아요리스트
 }

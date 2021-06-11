@@ -18,8 +18,9 @@ public class BoardService {
     @Autowired
     private MyUtils myUtils;
 
-    public List<BoardDomain> selBoardList(){
-        return mapper.selBoardList();
+    public List<BoardDomain> selBoardList(BoardDTO param){
+        param.setIuser(myUtils.getLoginUserPk());
+        return mapper.selBoardList(param);
     }
 
     public BoardDomain selBoard(BoardDTO param){
