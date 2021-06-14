@@ -1,11 +1,12 @@
-const listElem = document.querySelector("#list");
-
-function getListAjax(){
-    fetch('fav')
+const listElem = document.querySelector('#list');
+const pagingElem = document.querySelector('#paging');
+function getListAjax(page=1){
+    fetch('fav?page='+page)
     .then(res => res.json())
     .then(myJson =>{
         console.log(myJson);
-        makeView(myJson);
+        makeView(myJson.list);
+        makePaging(myJson.maxPageVal,page);
     });
     // fetch('fav')
     // .then(function (res){
@@ -15,8 +16,25 @@ function getListAjax(){
     //     console.log(myJson);
     // })
 }
+function makePaging(maxPageVal,selectedPage){
+    pagingElem.innerHTML=''; //초기화
+    for(let i=1;i<=maxPageVal;i++){
+        const span = document.createElement('span');
+        if(i===selectedPage){
+            span.classList.add('selected');
+        }else{
+            span.classList.add('pointer');
+            span.addEventListener('click',function(){
+                getListAjax(i);
+            });
+        }
+        span.innerText=i;
+        pagingElem.append(span);
+    }
+
+}
 function makeView(data){
-    listElem.innerHTML='';
+    listElem.innerHTML=''; //초기화
     const table = document.createElement('table');
     listElem.append(table);
 
