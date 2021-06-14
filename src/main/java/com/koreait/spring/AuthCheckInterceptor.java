@@ -27,7 +27,7 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 //        if(Arrays.asList(needLoginUriArr).contains(uri)){
             UserEntity loginUser = (UserEntity) request.getSession().getAttribute("loginUser");
             if(loginUser==null){
-                System.out.println("view"+modelAndView.getViewName());
+                System.out.println("view : "+modelAndView.getViewName());
                 modelAndView.setViewName("/user/needLogin");
             }
 //        }
